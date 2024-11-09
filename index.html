@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shizen World</title>
+
+    <!-- Required Core Stylesheet for Glide.js -->
+    <link rel="stylesheet" href="node_modules/@glidejs/glide/dist/css/glide.core.min.css">
+    <link rel="stylesheet" href="node_modules/@glidejs/glide/dist/css/glide.theme.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@3.0.0/reset.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+
+</head> 
+<body>
+  <header>
+    <p class="title">Shizen World</p>
+    <div class="links">
+      <p class="side1">Shop</p>
+      <p class="side2">Contact Us</p>
+    </div>
+  </header>
+
+  <!-- GLIDE SECTION -->
+  <div class="glide">
+    <div class="glide__track" data-glide-el="track">
+      <ul class="glide__slides">
+        <li class="glide__slide"><img src="C.jpg" alt=""></li>
+        <li class="glide__slide"><img src="A.jpg" alt=""></li>
+        <li class="glide__slide"><img src="B.jpg" alt=""></li>
+      </ul>
+    </div>
+    <div class="glide__arrows" data-glide-el="controls">
+      <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><i class="bi bi-arrow-left"></i></button>
+      <button class="glide__arrow glide__arrow--right" data-glide-dir=">"><i class="bi bi-arrow-right"></i></button>
+    </div>
+  </div>
+
+  <!-- GRID SECTION -->
+  <h1 class="intro">What do we sell?</h1>
+  <div class="grid">
+    <div class="grid-item">
+      <div class="image-container"><img src="5.jpg" alt="Sofa"><div class="overlay-text">Tea table</div></div>
+    </div>
+    <div class="grid-item">
+      <div class="image-container"><img src="2.jpg" alt="Dining Table"><div class="overlay-text">Shelf</div></div>
+    </div>
+    <div class="grid-item">
+      <div class="image-container"><img src="3.jpg" alt="Armchair"><div class="overlay-text">Decoration</div></div>
+    </div>
+    <div class="grid-item">
+      <div class="image-container"><img src="4.jpg" alt="Coffee Table"><div class="overlay-text">Chair</div></div>
+    </div>
+    <div class="grid-item">
+      <div class="image-container"><img src="1.jpg" alt="Bookshelf"><div class="overlay-text">Storage</div></div>
+    </div>
+    <div class="grid-item">
+      <div class="image-container"><img src="6.jpg" alt="Lamp"><div class="overlay-text">More</div></div>
+    </div>
+  </div>
+
+  <!-- MAP SECTION -->
+  <h1 class="intro">Find Us Here</h1>
+  <div id="map"></div>
+
+  <!-- CONTACT US SECTION -->
+
+  <div class="footer">
+    <div class="footer-content">
+      <div class="formform">
+        <h1 class="intro">Contact Us</h1>
+        <div id="contact-form" class="contact-form">
+          <form id="contactUsForm" data-parsley-validate>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required data-parsley-required-message="Please enter your name">
+      
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required data-parsley-type="email" data-parsley-required-message="Please enter a valid email address">
+      
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" required data-parsley-required-message="Please enter your message"></textarea>
+      
+            <button type="submit">Submit</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-info">
+        <p>Address: 123 Shizen Street, Toronto, Canada</p>
+        <p>Email: info@shizenworld.com</p>
+        <p>Phone: +1 (123) 456-7890</p>
+      </div>
+    </div>
+  </div>
+  
+
+
+  <!-- SCRIPTS -->
+  <script src="node_modules/@glidejs/glide/dist/glide.min.js"></script>
+  <script>new Glide('.glide').mount();</script>
+
+  <!-- Masonry Layout for Grid -->
+  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const grid = document.querySelector('.grid');
+      new Masonry(grid, { itemSelector: '.grid-item', columnWidth: '.grid-item', percentPosition: true, gutter: 10 });
+    });
+  </script>
+
+  <!-- Leaflet JS without integrity and crossorigin -->
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+  <script>
+    // Initialize the map centered on Toronto
+    document.addEventListener('DOMContentLoaded', () => {
+      const map = L.map('map').setView([43.6532, -79.3832], 13); // Toronto coordinates
+
+      // Add OpenStreetMap tiles
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
+
+      // Add a marker for Toronto
+      L.marker([43.6532, -79.3832]).addTo(map)
+        .bindPopup('Our Toronto Store Location')
+        .openPopup();
+    });
+  </script>
+</body>
+</html>
